@@ -13,5 +13,6 @@ function closeNav() {
     document.getElementById("sideNavMenu").style.width = "0";
 
 
-console.log("Testing!");
+    console.log("Testing!");
+}
 openNav();
