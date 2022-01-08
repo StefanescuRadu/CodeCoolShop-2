@@ -72,9 +72,20 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.6s; /* 0.5 second transition effect to slide in the sidenav */
-    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
-
+.sidenav .card-body {
+    padding-left: 3rem;
+}
+.sidenav p {
+    margin: 0;
+}
+#sidenavTrigger {
+    height: 100%; /* 100% Full-height */
+    min-width: 40px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    left: 0;
+}
 .jumbotron  {
     top: 0;
     position: fixed;
@@ -84,32 +95,104 @@
     flex-direction: row;
     padding: 3rem 1.5rem;
 }
-
 #main-title {
     margin: auto;
     color: black;
     text-decoration: none;
 }
-
 .jumbotron h1 {
     margin: auto;
     color: sandybrown;
 }
-
 .jumbotron h1:hover {
     color: darkorange;
 }
-
 .container {
     margin-top: 15rem;
     z-index: 3;
 }
-#sidenavTrigger {
-    height: 100%; /* 100% Full-height */
-    min-width: 40px; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    left: 0;
+.cart-open {
+    background-color: #3b3b3b;
+    min-height: 300px;
+    min-width: 400px;
+    transition: 0.2s;
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
+.cart-holder button {
+    margin: .3rem;
+    position: relative;
+    color: sandybrown;
+    float: right;
+}
+.cart-holder button:hover {
+    color: darkorange;
+}
+.cart-holder{
+    z-index: 1999;
+    right: .4rem;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    position: fixed; /* Stay in place */
+    margin-right: .3rem;
+}
+#cart {
+    display: none;
+    background-color: #2f5476;
+    opacity: 90%;
+    border-radius: 10px;
+    padding: .7rem;
+    border: #3b3b3b 2px solid;
+}
+#cart tbody th{
+    color: sandybrown;
+    border-bottom: darkorange 2px solid;
+    text-align: center;
+}
+#cart tbody tr th{
+    border-collapse: collapse;
+}
+#cart table th,td{
+    color: sandybrown;
+}
+.cart-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cart-inside {
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.total-row {
+    position: absolute;
+    left: 1rem;
+    bottom: .4rem;
+    width: 80%;
+    border-top: darkorange 2px solid;
+}
+.total-price {
+    position: absolute;
+    right: 1rem;
+    bottom: .1rem;
+}
+
+.content {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+.content input {
+    width: 33.3333333%;
+    margin-left: 33.3333333%;
+}
+
+#phone-number {
+    margin-bottom: 2.5rem;
+}
+
 /* The navigation menu links */
 .sidenav a {
     white-space: nowrap;
@@ -119,6 +202,9 @@
     color: sandybrown;
     display: block;
     transition: 0.3s;
+}
+.navBarDropButton a {
+    padding: 8px 8px 32px 8px;
 }
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
@@ -132,86 +218,68 @@
     font-size: 36px;
     margin-left: 50px;
 }
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-}
-
 #main-title {
     color: black;
     text-decoration: none;
 }
-
 .checkout p {
     margin-top: 1rem;
     line-height: .6rem;
 }
 
+.checkout {
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 13rem;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
 .checkout input {
     margin-bottom: 1rem;
 }
-
 .checkout #checkbox {
     display: flex;
     flex-direction: row;
 }
 
 .checkout #checkbox input{
-    margin: 1rem 1rem 1rem 0;
-}
-.cart-open {
-    background-color: #3b3b3b;
-    min-height: 300px;
-    min-width: 400px;
-    transition: 0.2s;
-    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    margin: auto 2rem auto 33.3333%;
+    width: 1rem;
 }
 
-.cart-holder button {
-    margin: .3rem;
-    position: relative;
-    color: sandybrown;
+#billing input {
+    margin-left: 0;
 }
 
-.cart-holder button:hover {
-    color: darkorange;
+#billing-address {
+    margin-bottom: 1.5rem;
 }
 
-.cart-holder{
-    z-index: 1999;
-    right: .4rem;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 1rem; /* Place content 60px from the top */
-    position: fixed; /* Stay in place */
-    margin-right: .3rem;
-
+#shipping-address {
+    margin-bottom: .7rem;
 }
 
-#cart {
-    display: none;
-    background-color: #2f5476;
-    opacity: 90%;
-    border-radius: 10px;
-    padding: .7rem;
+#back-button {
+    margin-left: 4rem;
 }
 
-#cart table th,td{
-    color: sandybrown;
+.payment {
+    width: 100%;
+    margin-bottom: 4rem;
 }
 
-.cart-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.payment #pay {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin: 0 4rem 4rem 0;
+    width: 8rem;
 }
 
-.cart-inside {
-    flex-shrink: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: 0.3s;
-}
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
