@@ -34,16 +34,22 @@
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
-
+    <div id="sidenavTrigger"></div>
     <div id="sideNavMenu" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+        <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button" aria-expanded="false" aria-controls="categoriesCollapse">
+            Categories </a>
+        <div class="card card-body" id="categoriesCollapse">
+            <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories/' + ${category.getName()}" th:text="${category.getName()}"></a></p>
+        </div>
+
+
+        <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
+            Suppliers </a>
+        <div class="card card-body" id="suppliersCollapse">
+            <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/vendors/' + ${vendor.getName()}" th:text="${vendor.getName()}"></a></p>
+        </div>
     </div>
 
-    <span onclick="openNav()">open</span>
 
     <div id="main" class="container">
     <div class="card">
