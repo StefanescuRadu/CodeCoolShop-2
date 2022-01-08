@@ -33,17 +33,21 @@ public class CartItem implements Serializable {
     }
 
     public float getSubTotalPrice(){
-        DecimalFormat df = new DecimalFormat("$#.00");
+        DecimalFormat df = new DecimalFormat("#.00");
         return Float.parseFloat(df.format(product.getDefaultPrice().multiply(new BigDecimal(quantity))));
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(product.getId());
-        oos.writeObject(quantity);
+        oos.writeInt(product.getId());
+        oos.writeInt(quantity);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         product = ProductDaoMem.getInstance().find((int)in.readObject());
         quantity = (int)in.readObject();
+    }
+    @Override
+    public String toString() {
+        return quantity + " * " + product.getName();
     }
 }
