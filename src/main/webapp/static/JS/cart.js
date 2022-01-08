@@ -12,7 +12,7 @@ function addToCart(e) {
     let productID = e.target.dataset.indexNumber;
     let data = {'productID': productID}
 
-    fetch("http://localhost:8080/cart", {
+    fetch("/cart", {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -24,7 +24,7 @@ function addToCart(e) {
 }
 
 function refreshCart(){
-    fetch("http://localhost:8080/cart", {
+    fetch("/cart", {
         method: 'GET',
         credentials: 'same-origin'
     })

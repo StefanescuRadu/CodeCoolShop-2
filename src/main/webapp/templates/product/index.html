@@ -5,7 +5,10 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>Codecool Shop</title>
+
+    <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
+    <script src="/static/JS/checkout.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -25,9 +28,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 <body>
+
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
 </div>
+
 <div id="sidenavTrigger"></div>
 <div id="sideNavMenu" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -36,23 +41,23 @@
     <div class="card card-body" id="categoriesCollapse">
         <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
     </div>
-
-
     <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
         Suppliers </a>
     <div class="card card-body" id="suppliersCollapse">
         <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/?supplierId=' + ${vendor.getId()}" th:text="${vendor.getName()}"></a></p>
     </div>
-
 </div>
 
 
 <div id="main" class="container">
+    <div class="checkout-button">
+        <button id="checkout">Checkout</button>
+    </div>
     <div th:if="${category != null}" >
         <strong th:text="${category.name}">Category Title</strong>
     </div>
     <div th:if="${category == null}" >
-        <strong th:text="${supplier.name}">Supplier Title</strong>
+        <strong th:text="${supplier.getName()}">Supplier Title</strong>
     </div>
 
     <div id="products" class="row">
@@ -69,7 +74,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${prod.getId()}">Add to cart</a>
                     </div>
                 </div>
             </div>
