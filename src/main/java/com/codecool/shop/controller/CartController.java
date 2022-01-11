@@ -6,6 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CartController.class);
+
     private final Cart shoppingCart = Cart.getInstance();
     private final ProductDaoMem pdm = ProductDaoMem.getInstance();
     @Override
@@ -21,14 +27,22 @@ public class CartController extends HttpServlet {
         JsonObject returnJson = new JsonObject();
         JsonArray cartItemsArray = new JsonArray();
         for (CartItem item : shoppingCart.getCartItems()) {
-            JsonObject cartItem = new JsonObject();
-            cartItem.addProperty("id", item.getProduct().getId());
-            cartItem.addProperty("name", item.getProduct().getName());
-            cartItem.addProperty("quantity", item.getQuantity());
-            cartItem.addProperty("price",item.getProduct().getDefaultPrice());
-            cartItem.addProperty("subtotal",item.getSubTotalPrice());
-            cartItem.addProperty("currency",item.getProduct().getDefaultCurrency().toString());
-            cartItemsArray.add(cartItem);
+            try{
+                JsonObject cartItem = new JsonObject();
+                cartItem.addProperty("id", item.getProduct().getId());
+                cartItem.addProperty("name", item.getProduct().getName());
+                cartItem.addProperty("quantity", item.getQuantity());
+                cartItem.addProperty("price",item.getProduct().getDefaultPrice());
+                cartItem.addProperty("subtotal",item.getSubTotalPrice());
+                cartItem.addProperty("currency",item.getProduct().getDefaultCurrency().toString());
+                cartItemsArray.add(cartItem);
+
+                LOG.info("Item loaded to the cart!" + item.getProduct().getName());
+            }
+            catch (Exception e){
+                LOG.error("Item could not be loaded to the cart!");
+            }
+
         }
         returnJson.add("items", cartItemsArray);
         returnJson.addProperty("totalPrice",shoppingCart.getTotalPrice());
@@ -45,6 +59,7 @@ public class CartController extends HttpServlet {
         int pID = jsonCartItem.get("productID").getAsInt();
 
         shoppingCart.addItem(pdm.find(pID));
+
     }
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

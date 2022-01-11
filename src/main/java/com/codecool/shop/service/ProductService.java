@@ -4,12 +4,16 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService{
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
+
 
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao) {
         this.productDao = productDao;

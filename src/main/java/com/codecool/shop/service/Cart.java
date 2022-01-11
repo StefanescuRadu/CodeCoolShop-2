@@ -1,11 +1,16 @@
 package com.codecool.shop.service;
 import com.codecool.shop.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.*;
 public class Cart implements Serializable {
     private final UUID orderID;
-    List<CartItem> cartItems = new ArrayList<CartItem>();
+    List<CartItem> cartItems = new ArrayList<>();
     private static Cart instance;
+    private static final Logger LOG = LoggerFactory.getLogger(Cart.class);
+
     public static Cart getInstance() {
         if (instance == null) {
             instance = new Cart();
@@ -34,7 +39,7 @@ public class Cart implements Serializable {
 
 
     public void removeItem(Product product) {
-        System.out.println("Removing " + product.getName());
+        LOG.info("Removing " + product.getName());
         cartItems.removeIf(cItem -> cItem.getProduct().getId() == product.getId());
     }
 
@@ -43,12 +48,26 @@ public class Cart implements Serializable {
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(orderID);
-        oos.writeObject(cartItems);
-        oos.close();
+        try{
+
+            oos.writeObject(orderID);
+            oos.writeObject(cartItems);
+            oos.close();
+            LOG.info("Cart written!");
+        }
+        catch (IOException e){
+            LOG.error("Cart could not be written!");
+        }
     }
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        instance = (Cart)in.readObject();
+        try{
+            instance = (Cart)in.readObject();
+            LOG.info("Cart read!");
+        }
+        catch (IOException e){
+            LOG.error("Cart could not be read!");
+        }
+
     }
     public List<CartItem> getCartItems() {
         return cartItems;
