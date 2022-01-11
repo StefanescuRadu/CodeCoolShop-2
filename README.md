@@ -1,5 +1,5 @@
-# Codecool shop (sprint 2)
 
+# Codecool shop (sprint 2)
 ## Story
 
 It's time to enhance the Online Shop, an online eCommerce web-application with Java,
@@ -45,7 +45,7 @@ checkout items and make payments, but can also log in and see the abandoned shop
 6. As a Developer, I want to read the DAO settings and DB connection parameters (url, database name, usr, pwd) from a config file, so I can change the settings of the application on every environment without compiling again.
     - The config file `src/main/resources/connection.properties`
 has the following structure (exact values may vary).
-```
+
 url: localhost:5432
 database: codecoolshop
 user: postgres
