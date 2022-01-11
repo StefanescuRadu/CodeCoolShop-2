@@ -210,7 +210,7 @@ window.onload = function () {
 
         console.log("Called sendPaymentData")
         if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue) {
-            fetch("http://localhost:8080/payment", {
+            fetch("/payment", {
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: {

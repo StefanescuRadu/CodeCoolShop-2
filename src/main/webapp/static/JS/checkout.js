@@ -22,14 +22,14 @@ function getData() {
     if (checkZipCode(zipCode) &&
         checkPhoneNumber(phoneNumber) &&
         checkTextInputs(textInputsList)) {
-        fetch("http://localhost:8080/checkout", {
+        fetch("/checkout", {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(createJson())
-        })
+        }).then(response => {window.location.href = response.url})
     } else {
         alert("Invalid input!")
     }

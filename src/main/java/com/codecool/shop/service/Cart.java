@@ -38,6 +38,10 @@ public class Cart implements Serializable {
         cartItems.removeIf(cItem -> cItem.getProduct().getId() == product.getId());
     }
 
+    public void clear(){
+        cartItems.clear();
+    }
+
     private void writeObject(ObjectOutputStream oos) throws IOException {
         oos.writeObject(orderID);
         oos.writeObject(cartItems);
