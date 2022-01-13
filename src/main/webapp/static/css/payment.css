@@ -84,10 +84,10 @@ input {
 
 /* CREDIT CARD IMAGE STYLING */
 .preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
+    -webkit-transition: none ;
+    -moz-transition: none ;
+    -ms-transition: none ;
+    -o-transition: none
 }
 
 .container {
