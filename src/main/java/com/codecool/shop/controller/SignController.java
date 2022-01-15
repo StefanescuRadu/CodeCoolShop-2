@@ -24,10 +24,14 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/sign"})
 public class SignController extends HttpServlet {
-    DatabaseManager databaseManager = new DatabaseManager();
+
+
+    private DatabaseManager databaseManager = new DatabaseManager();
     private final UserMem users = UserMem.getInstance();
     private static final Logger LOG = LoggerFactory.getLogger(SignController.class);
     private String error = null;
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -51,39 +55,34 @@ public class SignController extends HttpServlet {
         String user = req.getParameter("user");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-
-        List<User> getUsers = users.getAll();
-        if(getUsers.size()==0){
-            User newUser = new User(user,email,password);
-            try {
+        try {
                 databaseManager.setup();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        List<User> getUsers = databaseManager.getUsers();
+//        List<User> getUsers = users.getAll();
+        if(getUsers.size()==0){
+            User newUser = new User(user,email,password);
+
             databaseManager.addUser(newUser);
             LOG.info("LOGIN REDIRECT!");
             resp.sendRedirect("/login");
         }
         for (User user1:getUsers) {
-            if(user1.getEmail() == email){
+            System.out.println("This is" + user1.getName() + user1.getPassword());
+            System.out.println(user1.getEmail().equals(email));
+            if(user1.getEmail().equals(email)){
                 error = "Email already in use!";
                 LOG.info("SING UP REDIRECT!");
                 resp.sendRedirect("/sign");
             }
-            else{
-                User newUser = new User(user,email,password);
-
-                try {
-                    databaseManager.setup();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                databaseManager.addUser(newUser);
-                resp.sendRedirect("/login");
-            }
-
         }
+        User newUser = new User(user,email,password);
 
+
+        databaseManager.addUser(newUser);
+        resp.sendRedirect("/login");
 
 
     }

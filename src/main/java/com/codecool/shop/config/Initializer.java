@@ -25,7 +25,7 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        DatabaseManager databaseManager = new DatabaseManager();
+//        DatabaseManager databaseManager = new DatabaseManager();
 
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
@@ -44,11 +44,11 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Lenovo Laptop", new BigDecimal("500"), "USD", "Lenovo latest laptop.", laptop, lenovo));
-        try {
-            databaseManager.setup();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            databaseManager.setup();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }

@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 public class DatabaseManager {
@@ -68,6 +69,10 @@ public class DatabaseManager {
     }
     public void addUser(User user){
         userJDBC.add(user);
+    }
+
+    public List<User> getUsers(){
+        return userJDBC.getAll();
     }
 
     }

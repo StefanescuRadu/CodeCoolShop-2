@@ -4,6 +4,8 @@ import com.codecool.shop.model.User;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserJDBC {
     private DataSource dataSource;
@@ -24,6 +26,30 @@ public class UserJDBC {
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
             user.setId(resultSet.getInt(1));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM users ";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next()){
+
+               String name = resultSet.getString("name");
+               String email = resultSet.getString("email");
+               String password = resultSet.getString("password");
+               User user = new User(name,email,password);
+               users.add(user);
+            }
+
+            return users;
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

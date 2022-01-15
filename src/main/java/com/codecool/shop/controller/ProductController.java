@@ -30,22 +30,14 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        HttpSession session = req.getSession(false);
-//        Object email;
-//        if(session != null){
-//            email = session.getAttribute("email");
-//        }
-//        else{
-//            email = null;
-//        }
-
+        HttpSession session = req.getSession(false);
 
 
         LOG.info("Entered main page!");
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        ProductService productService = new ProductService(productDataStore, productCategoryDataStore);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -65,7 +57,10 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("allcategories", productCategoryDataStore.getAll());
         context.setVariable("allsuppliers", supplierDataStore.getAll());
-//        context.setVariable("session",email);
+        if (session != null) {
+            context.setVariable("ses", true);
+        }
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
