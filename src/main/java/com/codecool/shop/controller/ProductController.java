@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +27,19 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession(false);
+//        Object email;
+//        if(session != null){
+//            email = session.getAttribute("email");
+//        }
+//        else{
+//            email = null;
+//        }
+
+
 
         LOG.info("Entered main page!");
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -53,6 +65,7 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("allcategories", productCategoryDataStore.getAll());
         context.setVariable("allsuppliers", supplierDataStore.getAll());
+//        context.setVariable("session",email);
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

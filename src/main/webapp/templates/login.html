@@ -36,6 +36,9 @@
 </div>
 <div id="main" class="container">
     <form method="post" action="\login">
+        <div th:if="${error != null}">
+            <strong th:text="${error}"></strong>
+        </div>
         <label>
             <h1>Email</h1>
             <input type="email" name="email">

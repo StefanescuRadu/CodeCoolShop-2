@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.User;
 import org.postgresql.ds.PGSimpleDataSource;
 
 
@@ -47,10 +48,14 @@ public class DatabaseManager {
             prop.load(input);
 
             // get the property value and print it out
-            System.out.println(prop.getProperty("url"));
-            System.out.println(prop.getProperty("user"));
-            System.out.println(prop.getProperty("password"));
-            System.out.println(prop.getProperty("database"));
+//            System.out.println(prop.getProperty("url"));
+//            System.out.println(prop.getProperty("user"));
+//            System.out.println(prop.getProperty("password"));
+//            System.out.println(prop.getProperty("database"));
+//            dataSource.setUrl(prop.getProperty("url"));
+            dataSource.setDatabaseName(prop.getProperty("database"));
+            dataSource.setUser(prop.getProperty("user"));
+            dataSource.setPassword(prop.getProperty("password"));
             System.out.println("Trying to connect");
             dataSource.getConnection().close();
             System.out.println("Connection ok.");
@@ -61,7 +66,9 @@ public class DatabaseManager {
 
         return dataSource;
     }
-
+    public void addUser(User user){
+        userJDBC.add(user);
+    }
 
     }
 

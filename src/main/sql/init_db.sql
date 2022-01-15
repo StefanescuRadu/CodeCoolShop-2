@@ -4,6 +4,7 @@
 DROP TABLE IF EXISTS "Products";
 DROP TABLE IF EXISTS "ProductsCategories";
 DROP TABLE IF EXISTS "Suppliers";
+DROP TABLE IF EXISTS users;
 
 -- Create tables
 
@@ -28,6 +29,13 @@ CREATE TABLE "Suppliers"(
                             id SERIAL NOT NULL,
                             name TEXT,
                             description TEXT
+);
+
+CREATE TABLE public.users(
+                            id SERIAL NOT NULL,
+                            name TEXT,
+                            email TEXT,
+                            password TEXT
 );
 
 -- Insert elements into products

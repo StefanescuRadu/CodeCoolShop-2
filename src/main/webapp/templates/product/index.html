@@ -32,10 +32,17 @@
     <div class="navTop">
 
         <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
-        <a href="/sign" ><h1>Sign up</h1></a>
-        <a href="/login" ><h1>Login</h1></a>
-    </div>
 
+            <a href="/sign" ><h1>Sign up</h1></a>
+            <a href="/login" ><h1>Login</h1></a>
+
+<!--        <div th:if="${session != null}">-->
+<!--            <a href="/sign" ><h1>Logout</h1></a>-->
+
+<!--        </div>-->
+
+
+    </div>
     <div class="cart-holder">
 
         <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
