@@ -39,6 +39,7 @@ public class CheckoutController extends HttpServlet {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonToSave = (JsonObject) jsonParser.parse(incomeJson);
         JsonObject cartJson = getCartJson();
+        System.out.println();
         jsonToSave.add("cart", cartJson);
         Files.write(Paths.get(shoppingCart.getOrderID() + ".json"), jsonToSave.toString().getBytes());
         LOG.info("Redirection to payment!");
@@ -60,5 +61,10 @@ public class CheckoutController extends HttpServlet {
         cartJson.addProperty("totalPrice", shoppingCart.getTotalPrice());
         return cartJson;
     }
+
+
+
+
+
 
 }

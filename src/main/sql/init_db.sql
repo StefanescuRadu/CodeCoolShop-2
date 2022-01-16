@@ -38,6 +38,17 @@ CREATE TABLE public.users(
                             password TEXT
 );
 
+CREATE TABLE orders(
+                        id SERIAL NOT NULL,
+                        order_date DATE,
+                        order_status TEXT,
+                        total_price INT,
+                        user_email TEXT,
+                        product_list VARCHAR[][]
+);
+-- Test for orders
+insert into orders(product_list)  values ( ARRAY [ARRAY [1,2,3],ARRAY [1,2,4],ARRAY [1,2,5]] );
+
 -- Insert elements into products
 
 INSERT INTO

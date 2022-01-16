@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
             WebContext context = new WebContext(req, resp, req.getServletContext());;
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
             context.setVariable("error",error);
-            engine.process("login.html", context, resp.getWriter());
+            engine.process("registration/login.html", context, resp.getWriter());
             LOG.info("Entered login page!");
         }
         catch (Exception e){
@@ -66,7 +66,7 @@ public class LoginController extends HttpServlet {
         for (User user1:getUsers) {
             if(user1.getEmail().equals(email) && user1.getPassword().equals(password)){
                 HttpSession session = req.getSession();
-                session.setAttribute("name",user1.getName());
+                session.setAttribute("email",user1.getEmail());
                 resp.sendRedirect("/");
             }
             else{

@@ -40,7 +40,7 @@ public class SignController extends HttpServlet {
             WebContext context = new WebContext(req, resp, req.getServletContext());;
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
             context.setVariable("error",error);
-            engine.process("sign.html", context, resp.getWriter());
+            engine.process("registration/sign.html", context, resp.getWriter());
             LOG.info("Entered sign page!");
         }
         catch (Exception e){
