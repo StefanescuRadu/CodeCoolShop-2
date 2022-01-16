@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -21,6 +22,7 @@ public class DatabaseManager {
     private ProductDao productDao;
     private SupplierDao supplierDao;
     private UserJDBC userJDBC;
+    private OrderJDBC orderJDBC;
 
 
     public void setup() throws SQLException {
@@ -29,6 +31,7 @@ public class DatabaseManager {
         productDao = new ProductDaoJDBC(dataSource);
         supplierDao = new SupplierDaoJDBC(dataSource);
         userJDBC = new UserJDBC(dataSource);
+        orderJDBC = new OrderJDBC(dataSource);
     }
 
     private DataSource connect() throws SQLException {
@@ -75,5 +78,10 @@ public class DatabaseManager {
         return userJDBC.getAll();
     }
 
+    public void addOrder(Order order){orderJDBC.add(order);}
+
+
+    public List<Order> getOrders(){return orderJDBC.getAll();}
     }
+
 

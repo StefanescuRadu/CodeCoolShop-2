@@ -4,6 +4,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.dao.implementation.UserMem;
 
+import com.codecool.shop.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/orders"})
 public class OrdersController extends HttpServlet {
@@ -27,7 +30,15 @@ public class OrdersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        try {
+            databaseManager.setup();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        List<Order> orders = databaseManager.getOrders();
+        for (Order order:orders) {
+            System.out.println(order);
+        }
         try {
 
             WebContext context = new WebContext(req, resp, req.getServletContext());
