@@ -69,7 +69,8 @@
        aria-expanded="false" aria-controls="categoriesCollapse">
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"><a th:attr="href='/?categoryId=' + ${category.getId()}"
+        <p th:each="category,iterStat : ${allcategories}">
+            <a th:attr="href='/?categoryId=' + ${category.getId()}"
                                                              th:text="${category.getName()}"></a></p>
     </div>
     <a class="navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"

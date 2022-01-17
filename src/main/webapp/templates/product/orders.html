@@ -36,10 +36,29 @@
 </div>
 <div id="main" class="container">
 
-        <div th:if="${orders == null}">
-            <strong th:text="${error}"></strong>
+        <div th:if="${orders.isEmpty()}">
+            <h1>No orders!</h1>
         </div>
-        <h1>Orders page</h1>
+        <div th:if="${!orders.isEmpty()}">
+            <h1> List of orders! </h1>
+            <div class="flex-order">
+
+
+            <div class="order"  th:each="order : ${orders}">
+
+                <p th:text="${order.getOrder_date()}"></p>
+                <p th:text="${order.getOrderType()}"></p>
+                <div th:each="product : ${order.getProduct_list()}">
+                    <p th:text="${product}"></p>
+                </div>
+                <p th:text="'Price: ' + ${order.getTotal_price()}"></p>
+
+             </div>
+
+            </div>
+
+        </div>
+
 
 
     <div th:replace="footer.html :: copy"></div>

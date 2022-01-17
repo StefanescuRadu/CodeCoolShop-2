@@ -64,19 +64,15 @@ public class LoginController extends HttpServlet {
 //        List<User> getUsers = users.getAll();
         System.out.println(getUsers.size());
         for (User user1:getUsers) {
-            if(user1.getEmail().equals(email) && user1.getPassword().equals(password)){
+            if (user1.getEmail().equals(email) && user1.getPassword().equals(password)) {
                 HttpSession session = req.getSession();
-                session.setAttribute("email",user1.getEmail());
+                session.setAttribute("email", user1.getEmail());
                 resp.sendRedirect("/");
             }
-            else{
-                error = "Wrong username or password";
-                LOG.info("LOGIN REDIRECT!");
-                resp.sendRedirect("/login");
-            }
-
         }
-//
+        error = "Wrong username or password";
+        LOG.info("LOGIN REDIRECT!");
+        resp.sendRedirect("/login");
 
     }
 }
