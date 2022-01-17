@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
             WebContext context = new WebContext(req, resp, req.getServletContext());;
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
             context.setVariable("error",error);
+            error = null;
             engine.process("registration/login.html", context, resp.getWriter());
             LOG.info("Entered login page!");
         }
@@ -60,7 +61,11 @@ public class LoginController extends HttpServlet {
         List<User> getUsers = databaseManager.getUsers();
 
 
-
+//        if(getUsers.size() < 1){
+//            error = "Wrong username or password";
+//            LOG.info("LOGIN REDIRECT!");
+//            resp.sendRedirect("/login");
+//        }
 //        List<User> getUsers = users.getAll();
         System.out.println(getUsers.size());
         for (User user1:getUsers) {

@@ -9,7 +9,20 @@ public class Cart implements Serializable {
     private final UUID orderID;
     List<CartItem> cartItems = new ArrayList<>();
     private static Cart instance;
+    private String email;
     private static final Logger LOG = LoggerFactory.getLogger(Cart.class);
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public static Cart getInstance() {
         if (instance == null) {
@@ -20,6 +33,10 @@ public class Cart implements Serializable {
     private Cart() {
         this.orderID = UUID.randomUUID();
     }
+//    public Cart(String email,List<CartItem> cartItems,UUId id){
+//        this.email = email;
+//        this.cartItems = cartItems;
+//    }
     public UUID getOrderID() {
         return orderID;
     }

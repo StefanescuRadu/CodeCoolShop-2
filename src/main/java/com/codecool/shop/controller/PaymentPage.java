@@ -32,13 +32,17 @@ public class PaymentPage extends HttpServlet {
     private final Cart shoppingCart = Cart.getInstance();
     private static final Logger LOG = LoggerFactory.getLogger(PaymentPage.class);
     private String email;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
+            HttpSession session = req.getSession(false);
+
+
             LOG.info("Receiving request: " + req.getPathInfo());
             WebContext context = new WebContext(req, resp, req.getServletContext());
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-
+            context.setVariable("ses",session);
             context.setVariable("cart", shoppingCart);
 
             engine.process("product/payment.html", context, resp.getWriter());

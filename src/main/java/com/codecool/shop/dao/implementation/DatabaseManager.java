@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
+import com.codecool.shop.service.Cart;
 import org.postgresql.ds.PGSimpleDataSource;
 
 
@@ -23,6 +24,7 @@ public class DatabaseManager {
     private SupplierDao supplierDao;
     private UserJDBC userJDBC;
     private OrderJDBC orderJDBC;
+    private CartJDBC cartJDBC;
 
 
     public void setup() throws SQLException {
@@ -32,6 +34,7 @@ public class DatabaseManager {
         supplierDao = new SupplierDaoJDBC(dataSource);
         userJDBC = new UserJDBC(dataSource);
         orderJDBC = new OrderJDBC(dataSource);
+        cartJDBC = new CartJDBC(dataSource);
     }
 
     private DataSource connect() throws SQLException {
@@ -82,6 +85,11 @@ public class DatabaseManager {
 
 
     public List<Order> getOrders(){return orderJDBC.getAll();}
+
+    public void saveOrder(Cart cart,String email){
+        cartJDBC.add(cart,email);
+    }
+
     }
 
 

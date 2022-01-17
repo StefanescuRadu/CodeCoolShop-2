@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS "Products";
 DROP TABLE IF EXISTS "ProductsCategories";
 DROP TABLE IF EXISTS "Suppliers";
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS savedCart;
 
 -- Create tables
 
@@ -45,6 +46,12 @@ CREATE TABLE orders(
                         total_price INT,
                         user_email TEXT,
                         product_list TEXT[]
+);
+
+CREATE TABLE savedCart(
+        id SERIAL NOT NULL,
+        user_email TEXT,
+        product_LIST TEXT[]
 );
 -- Test for orders
 -- insert into orders(product_list)  values ( ARRAY [ARRAY [1,2,3],ARRAY [1,2,4],ARRAY [1,2,5]] );

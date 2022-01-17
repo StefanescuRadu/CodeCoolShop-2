@@ -10,9 +10,11 @@ window.onload = function () {
     const generatecard = document.getElementById('generatecard');
 
     const finalizeButton = document.getElementById("finalize-payment");
+    const saveData = document.getElementById("save-cart");
 
+    console.log(saveData);
     finalizeButton.addEventListener("click", () => sendPaymentData())
-
+    saveData.addEventListener("click",() => saveDataToDB());
 
     let cctype = null;
 
@@ -201,6 +203,25 @@ window.onload = function () {
     securitycode.addEventListener('focus', function () {
         document.querySelector('.creditcard').classList.add('flipped');
     });
+
+    function saveDataToDB(){
+        fetch("/save", {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    saveCart : "SaveCart"
+                }
+            )
+        }).then(response => {
+            console.log(response.url);
+            window.location.href = "http://localhost:8080/";
+        })
+    }
+
 
     function sendPaymentData() {
         const nameValue = document.getElementById('name').value;
